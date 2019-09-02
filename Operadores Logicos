@@ -1,0 +1,62 @@
+package Arreglo;
+
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+import Operador.OperadorAritmetico;
+
+public class AñoBisiesto {
+
+	public static boolean Bisiesto (int año) {
+		
+		boolean respuesta = true;
+		
+		if ((año % 100 != 0 && año % 4 == 0) || año % 400 == 0) {
+			respuesta = true;
+			System.out.println(respuesta);	
+		}
+		else {
+			respuesta = false;
+			System.out.println(respuesta);	
+		}
+		return respuesta;
+	}
+	
+	
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int año;
+		Scanner lector = new Scanner (System.in);
+	
+		System.out.println("Ingresa el año");
+		año = lector.nextInt();
+		
+		
+		FileWriter archivo =null;
+		PrintWriter imprimir = null;
+		
+		try {
+			archivo = new FileWriter ("C:\\bk\\ResultadoAñoBisiesto.txt",false);
+			imprimir = new PrintWriter (archivo);
+			
+			imprimir.println(año);
+			imprimir.println(AñoBisiesto.Bisiesto(año));
+			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (null!= archivo) {
+					archivo.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+}
