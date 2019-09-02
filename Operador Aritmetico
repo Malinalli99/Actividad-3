@@ -1,0 +1,119 @@
+package Operador;
+import java.util.Scanner;
+import java.io.*;
+
+public class OperadorAritmetico {
+	
+	
+	public static int  Suma ( int num1, int num2) throws FileNotFoundException, IOException {
+		int sum = 0;
+		sum = num1+num2;
+		System.out.println("La suma de los números es: "+sum );
+		
+		return sum;
+	}
+	
+	
+	public static int  Resta ( int num1, int num2) throws FileNotFoundException, IOException {
+		
+		int res = 0;
+    	res = num1-num2;
+    	System.out.println("La resta de los números es: "+res );
+ 
+    	return res;
+	}
+	
+	public static int  Multiplicacion ( int num1, int num2) throws FileNotFoundException, IOException {
+		
+		int mul = 0;
+    	mul = num1*num2;
+    	System.out.println("La multiplicación de los números es: "+mul );
+    	 
+    	return mul;
+        
+	}
+
+
+	public static int  Modulo ( int num1, int num2) throws FileNotFoundException, IOException {
+	
+		int mod = 0;
+		mod = num1%num2;
+		System.out.println("El módulo de los números es: "+mod );
+	
+		return mod;
+	}
+
+
+	public static int Division ( int num1, int num2) throws FileNotFoundException, IOException {
+	
+		int div = 0;
+		div = num1/num2;
+		System.out.println("La división de los números es: "+div );
+	 
+		return div;
+	}
+
+
+	public static void main(String[] args) throws FileNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		
+		String nums;
+		int largo = 2;
+		String numeros[] = new String [largo];
+		int contador = 0;
+		
+		FileReader lectorA = new FileReader("C:\\bk\\OperadorAritmetico.txt");
+		BufferedReader lectorB = new BufferedReader (lectorA);
+		
+        while((nums = lectorB.readLine())!=null) {
+            numeros[contador] = nums;
+            contador++;
+            if (contador == largo)
+            {   
+                break; 
+            }
+            
+        } lectorB.close();
+        
+    	String n1 = "";
+    	String n2 = "";
+    	int sum = 0;
+    	    
+            n1 = numeros[0];
+            n2 = numeros[1];
+    	
+    	int num1 = Integer.parseInt(n1);
+    	System.out.println("Número1: "+num1 );
+    	int num2 = Integer.parseInt(n2);
+    	System.out.println("Número2: "+num2 );
+    	
+    	FileWriter archivo =null;
+		PrintWriter imprimir = null;
+		
+		try {
+			archivo = new FileWriter ("C:\\bk\\ResultadoOperadorAritmetico.txt",false);
+			imprimir = new PrintWriter (archivo);
+			
+			imprimir.println("Número1: "+num1);
+			imprimir.println("Número2: "+num2);
+			imprimir.println("La suma de los números es: "+OperadorAritmetico.Suma(num1, num2));
+			imprimir.println("La resta de los números es: "+OperadorAritmetico.Resta(num1, num2));
+			imprimir.println("La multiplicación de los números es: "+OperadorAritmetico.Multiplicacion(num1, num2));
+			imprimir.println("El módulo de los números es: "+OperadorAritmetico.Modulo(num1, num2));
+			imprimir.println("La división de los números es: "+OperadorAritmetico.Division(num1, num2));
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (null!= archivo) {
+					archivo.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		}
+		
+	}
+
